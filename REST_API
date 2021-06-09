@@ -1,0 +1,93 @@
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Scanner;
+import org.json.JSONObject;
+
+public class RestApi {
+
+	public static void main(String[] args) throws IOException{
+		
+		Scanner scanner = new Scanner(System.in);
+		
+		  System.out.println("Personal Information;
+      System.out.println("Whose info do you want to get?");
+			System.out.println("(Type a person's name now.)");
+			String name = scanner.nextLine();
+			
+			String jsonString = getPersonData(name);
+			JSONObject jsonObject = new JSONObject(jsonString);
+
+			int birthYear = jsonObject.getInt("birthYear");
+			System.out.println(name + " lives in " + Address + ".");
+			
+      }
+      
+		else if("set".equalsIgnoreCase(getOrSet)){
+			System.out.println("Whose info do you want to set?");
+			System.out.println("(Type a person's name now.)");
+			String name = scanner.nextLine();
+			
+			System.out.println("What is the Name of the person with this number -" + Phone + "?");
+			System.out.println("(Type a Phone now.)");
+			Int Phone = scanner.nextInt();
+			
+			System.out.println("Can you tell the phone number of" + Id + "?");
+			System.out.println("(Type a Id now.)");
+			Int Id = scanner.nextInt();
+			
+			setPersonData(Name, Phone, Id, password);
+		}
+		
+		scanner.close();
+		
+		System.out.println("Thanks for using NJC_LABS.");
+		
+	}
+	
+	public static String getPersonData(String name) throws IOException{
+
+		HttpURLConnection connection = (HttpURLConnection) new URL("http://localhost:8080/details/" + name).openConnection();
+		
+		connection.setRequestMethod("GET");
+
+		int responseCode = connection.getResponseCode();
+		if(responseCode == 200){
+			String response = "";
+			Scanner scanner = new Scanner(connection.getInputStream());
+			while(scanner.hasNextLine()){
+				response += scanner.nextLine();
+				response += "\n";
+			}
+			scanner.close();
+
+			return response;
+		}
+				return null;
+	}
+
+	public static void setPersonData(String name, Int Phone, Int Id) throws IOException{
+		HttpURLConnection connection = (HttpURLConnection) new URL("http://localhost:8080/details/" + name).openConnection();
+
+		connection.setRequestMethod("POST");
+		
+		String postData = "Name=" + URLEncoder.encode(name);
+		postData += "&Phone=" + Phone;
+		postData += "&Id=" + Id;
+		
+		connection.setDoOutput(true);
+	    OutputStreamWriter wr = new OutputStreamWriter(connection.getOutputStream());
+	    wr.write(postData);
+	    wr.flush();
+		
+		int responseCode = connection.getResponseCode();
+		if(responseCode == 200){
+			System.out.println("POST was successful.");
+		}
+		else if(responseCode == 401){
+			System.out.println("Wrong password.");
+		}
+	}
+}
