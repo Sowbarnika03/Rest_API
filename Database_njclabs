@@ -1,0 +1,13 @@
+Creating Table after creation of njclabs database.
+CREATE TABLE `njclabs`.`details` ( `Name` VARCHAR(55) NOT NULL , `Address` VARCHAR(60) NOT NULL , `Id` INT(5) NOT NULL , `Phone` INT(10) NOT NULL ) 
+Inserting rows:
+INSERT INTO `details`(`Name`, `Address`, `Id`, `Phone`) VALUES ("Sowbar","Madurai",001,7708242522)
+INSERT INTO `details`(`Name`, `Address`, `Id`, `Phone`) VALUES ("Afri","Chennai",002,7379785462)
+INSERT INTO `details`(`Name`, `Address`, `Id`, `Phone`) VALUES ("Susmtiha","Ramehswaram",003,9854631245)
+INSERT INTO `details`(`Name`, `Address`, `Id`, `Phone`) VALUES ("Maansi","Rajasthan",004,9872144444)
+INSERT INTO `details`(`Name`, `Address`, `Id`, `Phone`) VALUES ("Mathy","Bangalore",005,9845678965)
+INSERT INTO `details`(`Name`, `Address`, `Id`, `Phone`) VALUES ("Moni","Chennai",006,9875612100)
+Display details table:
+SELECT * FROM `details`
+Display names with same address:
+SELECT Name from details WHERE Address= "Chennai"
