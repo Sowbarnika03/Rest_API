@@ -9,19 +9,21 @@ public class JDBCExample {
    static final String PASS = "guest123";
 
    public static void main(String[] args) {
-      // Open a connection
       try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
          Statement stmt = conn.createStatement();
       ) {		      
-         // Execute a query
          System.out.println("Inserting records into the table...");          
-         String sql = "INSERT INTO Registration VALUES (100, 'Zara', 'Ali', 18)";
+         String sql = INSERT INTO details VALUES ("Sowbar","Madurai",001,7708242522)";
          stmt.executeUpdate(sql);
-         sql = "INSERT INTO Registration VALUES (101, 'Mahnaz', 'Fatma', 25)";
+         sql = "INSERT INTO details VALUES ("Afri","Chennai",002,7379785462)";
          stmt.executeUpdate(sql);
-         sql = "INSERT INTO Registration VALUES (102, 'Zaid', 'Khan', 30)";
+         sql = "INSERT INTO details VALUES ("Susmtiha","Ramehswaram",003,9854631245)";
          stmt.executeUpdate(sql);
-         sql = "INSERT INTO Registration VALUES(103, 'Sumit', 'Mittal', 28)";
+         sql = "INSERT INTO details VALUES ("Maansi","Rajasthan",004,9872144444)";
+         stmt.executeUpdate(sql);
+         sql = "INSERT INTO details VALUES ("Mathy","Bangalore",005,9845678965)";
+         stmt.executeUpdate(sql);
+         sql="INSERT INTO details VALUES ("Moni","Chennai",006,9875612100)";
          stmt.executeUpdate(sql);
          System.out.println("Inserted records into the table...");   	  
       } catch (SQLException e) {
